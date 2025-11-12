@@ -1,0 +1,41 @@
+name: Lean CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up elan (Lean toolchain manager)
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+          echo "LEAN_VERSION=$(cat lean-toolchain)" >> $GITHUB_ENV
+
+      - name: Show versions
+        run: |
+          which lean || true
+          lean --version || true
+          lake --version || true
+
+      - name: Cache Lake build & deps
+        uses: actions/cache@v4
+        with:
+          path: |
+            .lake
+            lake-packages
+          key: lake-${{ runner.os }}-${{ env.LEAN_VERSION }}-${{ hashFiles('lake-manifest.json', 'lakefile.*') }}
+
+      - name: Build (Lake)
+        run: |
+          lake update
+          lake build
+

@@ -14,14 +14,31 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Detect Lean project directory
+        id: detect
+        run: |
+          if [ -f "lean-toolchain" ] && [ -f "lakefile.lean" -o -f "lakefile.toml" ]; then
+            echo "PROJECT_DIR=." >> $GITHUB_ENV
+          elif [ -f "qrh-proof/lean-toolchain" ] && [ -f "qrh-proof/lakefile.lean" -o -f "qrh-proof/lakefile.toml" ]; then
+            echo "PROJECT_DIR=qrh-proof" >> $GITHUB_ENV
+          else
+            echo "No Lean project found at repo root or qrh-proof/."
+            exit 1
+          fi
+          echo "Using PROJECT_DIR=$PROJECT_DIR"
+
       - name: Set up elan (Lean toolchain manager)
         run: |
           curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
-          echo "LEAN_VERSION=$(cat lean-toolchain)" >> $GITHUB_ENV
+
+      - name: Read Lean version
+        run: |
+          echo "LEAN_VERSION=$(cat $PROJECT_DIR/lean-toolchain)" >> $GITHUB_ENV
 
       - name: Show versions
         run: |
+          cd "$PROJECT_DIR"
           which lean || true
           lean --version || true
           lake --version || true
@@ -30,12 +47,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            .lake
-            lake-packages
-          key: lake-${{ runner.os }}-${{ env.LEAN_VERSION }}-${{ hashFiles('lake-manifest.json', 'lakefile.*') }}
+            ${{ env.PROJECT_DIR }}/.lake
+            ${{ env.PROJECT_DIR }}/lake-packages
+          key: lake-${{ runner.os }}-${{ env.LEAN_VERSION }}-${{ hashFiles(format('{0}/lake-manifest.json', env.PROJECT_DIR), format('{0}/lakefile.*', env.PROJECT_DIR)) }}
 
       - name: Build (Lake)
         run: |
+          cd "$PROJECT_DIR"
           lake update
           lake build
 

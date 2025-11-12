@@ -1,0 +1,10 @@
+name = "qrh-proof"
+version = "0.1.0"
+defaultTargets = ["qrh-proof"]
+
+[[lean_lib]]
+name = "QrhProof"
+
+[[lean_exe]]
+name = "qrh-proof"
+root = "Main"

@@ -1,0 +1,16 @@
+name: Build (Lean 4)
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Lean toolchain
+        run: |
+          curl https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -sSf | sh -s -- -y --no-modify-path
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+          lean --version
+      - name: Build
+        run: |
+          lake update
+          lake build

@@ -68,7 +68,9 @@ end ClassicalXiData
   have hreflect :
       (1 : ℂ) / 2 + Complex.I * (-t) = 1 - ((1 : ℂ) / 2 + Complex.I * t) := by
     ring
-  simpa [hreflect] using
+  have hI : Complex.I * (-t) = -(Complex.I * t) := by
+    simp [mul_comm, mul_left_comm, mul_assoc]
+  simpa [hreflect, hI, sub_eq_add_neg] using
     completedRiemannZeta_one_sub ((1 : ℂ) / 2 + Complex.I * t)
 
 /-- Bombieri's analytic restatement of RH: every zero of the ξ-function along
@@ -109,10 +111,12 @@ lemma completed_zero_of_nontrivial_zero {s : ℂ}
 
 lemma critical_param_eq (s : ℂ) :
     (1 : ℂ) / 2 + Complex.I * (-Complex.I * (s - (1 : ℂ) / 2)) = s := by
+  have hI : Complex.I * (-Complex.I) = (1 : ℂ) := by
+    simp [Complex.I_mul_I]
   have hmul :
-      Complex.I * (-Complex.I * (s - (1 : ℂ) / 2)) =
-        s - (1 : ℂ) / 2 := by
-    simp [mul_comm, mul_left_comm, mul_assoc, sub_eq_add_neg, Complex.I_mul_I]
+      Complex.I * (-Complex.I * (s - (1 : ℂ) / 2))
+        = s - (1 : ℂ) / 2 := by
+    simpa [mul_comm, mul_left_comm, mul_assoc, hI, sub_eq_add_neg]
   simpa [hmul, sub_eq_add_neg, add_comm, add_left_comm, add_assoc]
 
 lemma im_negI_mul_sub_half (s : ℂ) :
@@ -161,5 +165,7 @@ lemma calibration_via_phi {hQ : QFacHypotheses} {hXi : ClassicalXiData}
   simpa [ClassicalXiData.xiSlice, phi_ofSlice] using H.calibration p
 
 end SliceCoherenceCalibration
+
+end
 
 end QRH

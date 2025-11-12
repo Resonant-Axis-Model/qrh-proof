@@ -42,7 +42,7 @@ instance : Coe SlicePoint ℍ := ⟨toQuat⟩
 @[simp] lemma coe_ofComplex (z : ℂ) : (ofComplex z : ℍ) = ⟨z.re, z.im, 0, 0⟩ := rfl
 
 /-- Reconstruct a slice point from a quaternion whose `j,k` parts vanish. -/
-@[simp] def ofQuat (q : ℍ) (hJ : q.imJ = 0) (hK : q.imK = 0) : SlicePoint :=
+@[simp] def ofQuat (q : ℍ) (_ : q.imJ = 0) (_ : q.imK = 0) : SlicePoint :=
   ⟨q.re, q.imI⟩
 
 /-- Slice reflection induced by the global involution `J`. -/

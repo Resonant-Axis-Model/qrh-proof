@@ -132,7 +132,7 @@ private lemma perturb_eq (a t : ℝ) :
 
 private lemma perturb_dist (a t : ℝ) (ht : 0 ≤ t) :
     |(1 - t) * a + t * (1 - a) - a| = t * |1 - 2 * a| := by
-  simpa [perturb_eq, abs_mul, abs_of_nonneg ht]
+  simp [perturb_eq, abs_mul, abs_of_nonneg ht]
 
 private lemma symmetric_strictConvex_localMin_eq_half
     {f : ℝ → ℝ}
@@ -211,9 +211,9 @@ private lemma symmetric_strictConvex_localMin_eq_half
         (1 - t) * f a + t * f b = f a := by
       calc
         (1 - t) * f a + t * f b
-            = (1 - t) * f a + t * f a := by simpa [hb]
+            = (1 - t) * f a + t * f a := by simp [hb]
         _ = ((1 - t) + t) * f a := by ring
-        _ = f a := by simpa [hcoef]
+        _ = f a := by simp [hcoef]
     simpa [x0, hsum, b] using hstrict'
   exact (lt_irrefl _ (lt_of_le_of_lt hx_ge hx_lt))
 

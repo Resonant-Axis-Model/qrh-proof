@@ -11,6 +11,9 @@ open scoped Real ComplexConjugate
 
 noncomputable section
 
+set_option linter.unnecessarySimpa false
+set_option linter.unusedSimpArgs false
+
 /-- Canonical chart `φ : ℍ → ℂ` selecting the slice spanned by `1` and `Quaternion.i`. -/
 @[simp] def phi (q : ℍ) : ℂ :=
   Complex.mk (re q) q.imI
@@ -42,7 +45,7 @@ namespace ClassicalXiData
 
 lemma xiSlice_eq_phi (h : ClassicalXiData) (p : SlicePoint) :
     h.xiSlice p = h.xi (phi (p : ℍ)) := by
-  simpa [ClassicalXiData.xiSlice, phi_ofSlice]
+  simp [ClassicalXiData.xiSlice]
 
 @[simp] def zetaSlice (h : ClassicalXiData) (p : SlicePoint) : ℂ :=
   h.zeta (SlicePoint.chart p)
@@ -61,17 +64,27 @@ end ClassicalXiData
 
 /-- Bombieri's specialization `ξ(t) = ξ(1/2 + it)` viewed as a complex function. -/
 @[simp] def bombieriXi (t : ℂ) : ℂ :=
-  completedRiemannZeta ((1 : ℂ) / 2 + Complex.I * t)
+  completedRiemannZeta (Complex.I * t + (1 : ℂ) / 2)
+
+@[simp] lemma completedRiemannZeta_eq_bombieriXi (t : ℂ) :
+    completedRiemannZeta (Complex.I * t + (1 : ℂ) / 2) = bombieriXi t := rfl
 
 @[simp] lemma bombieriXi_neg (t : ℂ) : bombieriXi (-t) = bombieriXi t := by
-  unfold bombieriXi
-  have hreflect :
-      (1 : ℂ) / 2 + Complex.I * (-t) = 1 - ((1 : ℂ) / 2 + Complex.I * t) := by
+  have harg :
+      -(Complex.I * t) + (1 : ℂ) / 2 =
+        1 - (Complex.I * t + (1 : ℂ) / 2) := by
     ring
-  have hI : Complex.I * (-t) = -(Complex.I * t) := by
-    simp [mul_comm, mul_left_comm, mul_assoc]
-  simpa [hreflect, hI, sub_eq_add_neg] using
-    completedRiemannZeta_one_sub ((1 : ℂ) / 2 + Complex.I * t)
+  calc
+    bombieriXi (-t)
+        = completedRiemannZeta (-(Complex.I * t) + (1 : ℂ) / 2) := by
+            simp [bombieriXi]
+    _ = completedRiemannZeta (1 - (Complex.I * t + (1 : ℂ) / 2)) := by
+            refine congrArg completedRiemannZeta ?_
+            simpa using harg
+    _ = completedRiemannZeta (Complex.I * t + (1 : ℂ) / 2) := by
+            simpa using
+              completedRiemannZeta_one_sub (Complex.I * t + (1 : ℂ) / 2)
+    _ = bombieriXi t := rfl
 
 /-- Bombieri's analytic restatement of RH: every zero of the ξ-function along
     `s = 1/2 + it` occurs for a real parameter `t`. -/
@@ -103,25 +116,27 @@ lemma completed_zero_of_nontrivial_zero {s : ℂ}
     simpa [riemannZeta_zero] using this
   have hΓ := gamma_ne_zero_of_nontrivial_zero hz htriv
   have hrel := riemannZeta_def_of_ne_zero (s:=s) hs0
-  have hmul :
-      completedRiemannZeta s = riemannZeta s * Complex.Gammaℝ s := by
-    have := congrArg (fun z : ℂ => z * Complex.Gammaℝ s) hrel
-    simpa [mul_comm, mul_left_comm, mul_assoc] using this.symm
-  simpa [hz, mul_comm, mul_left_comm, mul_assoc] using hmul
-
-lemma critical_param_eq (s : ℂ) :
-    (1 : ℂ) / 2 + Complex.I * (-Complex.I * (s - (1 : ℂ) / 2)) = s := by
-  have hI : Complex.I * (-Complex.I) = (1 : ℂ) := by
-    simp [Complex.I_mul_I]
-  have hmul :
-      Complex.I * (-Complex.I * (s - (1 : ℂ) / 2))
-        = s - (1 : ℂ) / 2 := by
-    simpa [mul_comm, mul_left_comm, mul_assoc, hI, sub_eq_add_neg]
-  simpa [hmul, sub_eq_add_neg, add_comm, add_left_comm, add_assoc]
+  have hmul :=
+    congrArg (fun z : ℂ => z * Complex.Gammaℝ s) hrel
+  have hdiv :
+      (completedRiemannZeta s / Complex.Gammaℝ s) * Complex.Gammaℝ s =
+        completedRiemannZeta s := by
+    have hΓ' : Complex.Gammaℝ s ≠ 0 := hΓ
+    simp [div_eq_mul_inv, hΓ']
+  have hfinal :
+      riemannZeta s * Complex.Gammaℝ s = completedRiemannZeta s := by
+    simpa [hdiv] using hmul
+  simpa [hz, mul_comm, mul_left_comm, mul_assoc] using hfinal.symm
 
 lemma im_negI_mul_sub_half (s : ℂ) :
     (-(Complex.I) * (s - (1 : ℂ) / 2)).im = (1 : ℝ) / 2 - s.re := by
-  simpa [sub_eq_add_neg, mul_comm, mul_left_comm, mul_assoc]
+  have hneg :
+      (-(Complex.I) * (s - (1 : ℂ) / 2)).im =
+        - (s.re - (1 : ℝ) / 2) := by
+    simp [sub_eq_add_neg]
+  have hflip : (1 : ℝ) / 2 - s.re = - (s.re - (1 : ℝ) / 2) := by ring
+  simpa [hflip] using hneg
+
 
 lemma bombieri_im_zero_of_nontrivial_zero
     (hB : BombieriHypothesis) {s : ℂ}
@@ -131,9 +146,29 @@ lemma bombieri_im_zero_of_nontrivial_zero
   set t := -Complex.I * (s - (1 : ℂ) / 2)
   have hcomp : completedRiemannZeta s = 0 :=
     completed_zero_of_nontrivial_zero hz htriv
-  have hxi : bombieriXi t = 0 := by
-    change completedRiemannZeta ((1 : ℂ) / 2 + Complex.I * t) = 0
-    simpa [t, critical_param_eq s] using hcomp
+  have hIt :
+      Complex.I * t = s - (1 : ℂ) / 2 := by
+    have hI : Complex.I * -Complex.I = (1 : ℂ) := by
+      simp [mul_neg, Complex.I_mul_I]
+    calc
+      Complex.I * t
+          = Complex.I * (-Complex.I * (s - (1 : ℂ) / 2)) := by
+              simp [t]
+      _ = (Complex.I * -Complex.I) * (s - (1 : ℂ) / 2) := by
+            simpa using
+              (mul_assoc (Complex.I) (-Complex.I) (s - (1 : ℂ) / 2)).symm
+      _ = s - (1 : ℂ) / 2 := by simpa [hI]
+  have htparam :
+      Complex.I * t + (1 : ℂ) / 2 = s := by
+    calc
+      Complex.I * t + (1 : ℂ) / 2
+          = (s - (1 : ℂ) / 2) + (1 : ℂ) / 2 := by simpa [hIt]
+      _ = s := by ring
+  have hparam_s :
+      s = Complex.I * t + (1 : ℂ) / 2 := htparam.symm
+  have hxi := hcomp
+  rw [hparam_s] at hxi
+  change bombieriXi t = 0 at hxi
   have ht : t.im = 0 := hB t hxi
   have hproj : (1 : ℝ) / 2 - s.re = 0 := by
     simpa [t, im_negI_mul_sub_half] using ht
@@ -143,8 +178,7 @@ lemma BombieriHypothesis.to_RiemannHypothesis
     (hB : BombieriHypothesis) :
     RiemannHypothesis := by
   intro s hz htriv hs1
-  simpa using
-    bombieri_im_zero_of_nontrivial_zero hB hz htriv
+  exact bombieri_im_zero_of_nontrivial_zero hB hz htriv
 
 /-- Calibration that relates quaternionic coherence to the classical `|ξ|^2` on the slice. -/
 structure SliceCoherenceCalibration (hQ : QFacHypotheses)
@@ -162,7 +196,11 @@ lemma calibration_via_phi {hQ : QFacHypotheses} {hXi : ClassicalXiData}
     ∀ p : SlicePoint, C (p : ℍ) =
       H.scale * Complex.normSq (hXi.xi (phi (p : ℍ))) := by
   intro p
-  simpa [ClassicalXiData.xiSlice, phi_ofSlice] using H.calibration p
+  calc
+    C (p : ℍ)
+        = H.scale * Complex.normSq (hXi.xiSlice p) := H.calibration p
+    _ = H.scale * Complex.normSq (hXi.xi (phi (p : ℍ))) := by
+          simp [ClassicalXiData.xiSlice]
 
 end SliceCoherenceCalibration
 

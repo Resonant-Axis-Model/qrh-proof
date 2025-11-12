@@ -40,14 +40,14 @@ lemma re_J (q : ℍ) : re (J q) = 1 - re q := by
 attribute [-simp] QRH.J
 
 @[simp] lemma normSq_mul (a b : ℍ) :
-    Quaternion.normSq (a * b) = Quaternion.normSq a * Quaternion.normSq b := by
-  simpa using Quaternion.normSq_mul a b
+    Quaternion.normSq (a * b) = Quaternion.normSq a * Quaternion.normSq b :=
+  (map_mul Quaternion.normSq a b : _)
 
-@[simp] lemma normSq_one : Quaternion.normSq (1 : ℍ) = 1 := by
-  simpa using (Quaternion.normSq_one : Quaternion.normSq (1 : ℍ) = (1 : ℝ))
+@[simp] lemma normSq_one : Quaternion.normSq (1 : ℍ) = 1 :=
+  (map_one Quaternion.normSq : _)
 
 @[simp] lemma normSq_conj (q : ℍ) : Quaternion.normSq (conj q) = Quaternion.normSq q := by
-  simpa [conj] using (Quaternion.normSq_star (q := q))
+  simp [conj]
 
 lemma normSq_unit_of_mul_conj_eq_one {U : ℍ}
     (hU : U * conj U = (1 : ℍ)) : Quaternion.normSq U = 1 := by

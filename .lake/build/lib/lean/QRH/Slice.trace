@@ -1,0 +1,36 @@
+{"synthetic": false,
+ "outputs":
+ {"o": ["13178021354083410460"],
+  "i": "5997393628388145276",
+  "c": "12496657771418691174"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/Cli/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/batteries/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/Qq/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/aesop/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/importGraph/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/plausible/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/mathlib/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean /Users/home/.elan/toolchains/leanprover--lean4---v4.24.0/bin/lean /Users/home/Desktop/RQM Technologies LLC/VS Code/QRH/Slice.lean -o /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean/QRH/Slice.olean -i /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean/QRH/Slice.ilean -c /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/ir/QRH/Slice.c --setup /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/ir/QRH/Slice.setup.json --json",
+   "level": "trace"},
+  {"message":
+   "QRH/Slice.lean:45:28: unused variable `hJ`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`",
+   "level": "warning"},
+  {"message":
+   "QRH/Slice.lean:45:45: unused variable `hK`\n\nNote: This linter can be disabled with `set_option linter.unusedVariables false`",
+   "level": "warning"}],
+ "inputs":
+ [["QRH.Slice:deps",
+   [["deps",
+     [["qrh/QRH:extraDep", [["@qrh:extraDep", "1723"]]],
+      ["imports",
+       [["Mathlib transitive imports (legacy)", "6547561361995848057"],
+        ["Mathlib:importAllArts", "952277917019202149"],
+        ["QRH.Prelude transitive imports (legacy)", "7720979456661443851"],
+        ["QRH.Prelude:importAllArts", "10289932736774725621"]]]]],
+    ["libs",
+     [["import dynlibs", "1723"],
+      ["package external libraries", "1723"],
+      ["module dynlibs", "1723"],
+      ["module plugins", "1723"]]]]],
+  ["Lean 4.24.0, commit 797c613eb9b6d4ec95db23e3e00af9ac6657f24b",
+   "1165570713881806064"],
+  ["/Users/home/Desktop/RQM Technologies LLC/VS Code/QRH/Slice.lean",
+   "9487729528030488161"],
+  ["options", "1723"],
+  ["Module.leanArgs: #[]", "1723"]],
+ "depHash": "3382296263681710574"}

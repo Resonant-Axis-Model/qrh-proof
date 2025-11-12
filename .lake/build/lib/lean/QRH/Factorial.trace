@@ -1,0 +1,30 @@
+{"synthetic": false,
+ "outputs":
+ {"o": ["15079777227077072049"],
+  "i": "16663134423526313518",
+  "c": "17859329928854391303"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/Cli/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/batteries/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/Qq/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/aesop/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/importGraph/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/plausible/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/mathlib/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean /Users/home/.elan/toolchains/leanprover--lean4---v4.24.0/bin/lean /Users/home/Desktop/RQM Technologies LLC/VS Code/QRH/Factorial.lean -o /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean/QRH/Factorial.olean -i /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean/QRH/Factorial.ilean -c /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/ir/QRH/Factorial.c --setup /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/ir/QRH/Factorial.setup.json --json",
+   "level": "trace"}],
+ "inputs":
+ [["QRH.Factorial:deps",
+   [["deps",
+     [["qrh/QRH:extraDep", [["@qrh:extraDep", "1723"]]],
+      ["imports",
+       [["Mathlib transitive imports (legacy)", "6547561361995848057"],
+        ["Mathlib:importAllArts", "952277917019202149"],
+        ["QRH.Prelude transitive imports (legacy)", "7720979456661443851"],
+        ["QRH.Prelude:importAllArts", "10289932736774725621"]]]]],
+    ["libs",
+     [["import dynlibs", "1723"],
+      ["package external libraries", "1723"],
+      ["module dynlibs", "1723"],
+      ["module plugins", "1723"]]]]],
+  ["Lean 4.24.0, commit 797c613eb9b6d4ec95db23e3e00af9ac6657f24b",
+   "1165570713881806064"],
+  ["/Users/home/Desktop/RQM Technologies LLC/VS Code/QRH/Factorial.lean",
+   "14696765652711473406"],
+  ["options", "1723"],
+  ["Module.leanArgs: #[]", "1723"]],
+ "depHash": "349114178205961108"}

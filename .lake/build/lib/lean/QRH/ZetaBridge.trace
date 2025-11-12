@@ -1,0 +1,37 @@
+{"synthetic": false,
+ "outputs":
+ {"o": ["15979098105846595549"],
+  "i": "3130765048118185670",
+  "c": "4680294089311861854"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/Cli/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/batteries/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/Qq/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/aesop/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/importGraph/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/plausible/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/mathlib/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean /Users/home/.elan/toolchains/leanprover--lean4---v4.24.0/bin/lean /Users/home/Desktop/RQM Technologies LLC/VS Code/QRH/ZetaBridge.lean -o /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean/QRH/ZetaBridge.olean -i /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean/QRH/ZetaBridge.ilean -c /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/ir/QRH/ZetaBridge.c --setup /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/ir/QRH/ZetaBridge.setup.json --json",
+   "level": "trace"},
+  {"message":
+   "QRH/ZetaBridge.lean:42:2: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`",
+   "level": "warning"}],
+ "inputs":
+ [["QRH.ZetaBridge:deps",
+   [["deps",
+     [["qrh/QRH:extraDep", [["@qrh:extraDep", "1723"]]],
+      ["imports",
+       [["Mathlib transitive imports (legacy)", "6547561361995848057"],
+        ["Mathlib:importAllArts", "952277917019202149"],
+        ["QRH.Prelude transitive imports (legacy)", "7720979456661443851"],
+        ["QRH.Prelude:importAllArts", "10289932736774725621"],
+        ["QRH.Coherence transitive imports (legacy)", "16157342150317751699"],
+        ["QRH.Coherence:importAllArts", "15407882677092517096"],
+        ["QRH.Slice transitive imports (legacy)", "4495899737443016119"],
+        ["QRH.Slice:importAllArts", "10365446735468177183"]]]]],
+    ["libs",
+     [["import dynlibs", "1723"],
+      ["package external libraries", "1723"],
+      ["module dynlibs", "1723"],
+      ["module plugins", "1723"]]]]],
+  ["Lean 4.24.0, commit 797c613eb9b6d4ec95db23e3e00af9ac6657f24b",
+   "1165570713881806064"],
+  ["/Users/home/Desktop/RQM Technologies LLC/VS Code/QRH/ZetaBridge.lean",
+   "1535709804025335526"],
+  ["options", "1723"],
+  ["Module.leanArgs: #[]", "1723"]],
+ "depHash": "6300106396206717853"}

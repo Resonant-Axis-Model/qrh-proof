@@ -1,0 +1,37 @@
+{"synthetic": false,
+ "outputs":
+ {"o": ["12596480281357449893"],
+  "i": "10159207256659802876",
+  "c": "6045614705198221508"},
+ "log":
+ [{"message":
+   ".> LEAN_PATH=/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/Cli/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/batteries/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/Qq/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/aesop/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/proofwidgets/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/importGraph/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/plausible/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/packages/mathlib/.lake/build/lib/lean:/Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean /Users/home/.elan/toolchains/leanprover--lean4---v4.24.0/bin/lean /Users/home/Desktop/RQM Technologies LLC/VS Code/QRH/Prelude.lean -o /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean/QRH/Prelude.olean -i /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/lib/lean/QRH/Prelude.ilean -c /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/ir/QRH/Prelude.c --setup /Users/home/Desktop/RQM Technologies LLC/VS Code/.lake/build/ir/QRH/Prelude.setup.json --json",
+   "level": "trace"},
+  {"message":
+   "QRH/Prelude.lean:44:2: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`",
+   "level": "warning"},
+  {"message":
+   "QRH/Prelude.lean:47:2: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`",
+   "level": "warning"},
+  {"message":
+   "QRH/Prelude.lean:50:2: try 'simp' instead of 'simpa'\n\nNote: This linter can be disabled with `set_option linter.unnecessarySimpa false`",
+   "level": "warning"}],
+ "inputs":
+ [["QRH.Prelude:deps",
+   [["deps",
+     [["qrh/QRH:extraDep", [["@qrh:extraDep", "1723"]]],
+      ["imports",
+       [["Mathlib transitive imports (legacy)", "6547561361995848057"],
+        ["Mathlib:importAllArts", "952277917019202149"]]]]],
+    ["libs",
+     [["import dynlibs", "1723"],
+      ["package external libraries", "1723"],
+      ["module dynlibs", "1723"],
+      ["module plugins", "1723"]]]]],
+  ["Lean 4.24.0, commit 797c613eb9b6d4ec95db23e3e00af9ac6657f24b",
+   "1165570713881806064"],
+  ["/Users/home/Desktop/RQM Technologies LLC/VS Code/QRH/Prelude.lean",
+   "15275054494072849608"],
+  ["options", "1723"],
+  ["Module.leanArgs: #[]", "1723"]],
+ "depHash": "5246575108291907425"}
